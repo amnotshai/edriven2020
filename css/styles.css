@@ -1,0 +1,11 @@
+.background {
+  background-color: lightgray;
+  width: 90%;
+  margin: auto;
+}
+h1 {
+  color: black;
+  font-size: 1em;
+  margin-bottom: 0.3em;
+  text-align: center;
+}
