@@ -16,6 +16,7 @@
   <body>
     <h1 id="hid1" style="font-size: larger; margin-bottom: 5%">Calendar</h1>
     <table id="tbldata" style="border: black 1px solid">
+      <caption id="monthTxt" style="border: black 1px solid"></caption>
       <thead style="border: black 1px solid">
         <tr>
           <th style="border: black; background-color: rgb(255, 131, 109)">
@@ -33,15 +34,16 @@
     </table>
     <script src="/js/my.js"></script>
     <script>
-      let month = prompt("Month", "1");
+      let month = prompt("Month(1-12)", "1");
       let numMonth = parseInt(month);
-      let day = prompt("Day", "1");
+      let day = prompt("Day(1-7)", "1");
       numDay = parseInt(day);
 
       if (!(numMonth > 0 && numMonth <= 12) || !(numDay > 0 && numDay <= 7)) {
         document.getElementById("hid1").innerHTML = "Invalid Entries";
       } else {
-        document.getElementById("hid1").innerHTML = data[numMonth - 1].month;
+        document.getElementById("monthTxt").innerHTML =
+          data[numMonth - 1].month;
         startDay = numDay - 1;
         numDaysinMonth = data[numMonth - 1].numdays;
         let tbody = document.getElementById("t-body");
