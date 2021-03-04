@@ -4,13 +4,78 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Shaira</title>
+    <title>Calendar</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      td,
+      th {
+        border: black 1px solid;
+      }
+    </style>
   </head>
   <body>
-    <div class="background">
-      <h1>Shai's File</h1>
-    </div>
+    <h1 id="hid1" style="font-size: larger; margin-bottom: 5%">Calendar</h1>
+    <table id="tbldata" style="border: black 1px solid">
+      <thead style="border: black 1px solid">
+        <tr>
+          <th style="border: black; background-color: rgb(255, 131, 109)">
+            Sunday
+          </th>
+          <th>Monday</th>
+          <th>Tuesday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+          <th>Saturday</th>
+        </tr>
+      </thead>
+      <tbody id="t-body"></tbody>
+    </table>
     <script src="/js/my.js"></script>
+    <script>
+      let month = prompt("Month", "1");
+      let numMonth = parseInt(month);
+      let day = prompt("Day", "1");
+      numDay = parseInt(day);
+
+      if (!(numMonth > 0 && numMonth <= 12) || !(numDay > 0 && numDay <= 7)) {
+        document.getElementById("hid1").innerHTML = "Invalid Entries";
+      } else {
+        document.getElementById("hid1").innerHTML = data[numMonth - 1].month;
+        startDay = numDay - 1;
+        numDaysinMonth = data[numMonth - 1].numdays;
+        let tbody = document.getElementById("t-body");
+        tbody.innerHTML = "";
+        let date = 1;
+        for (let i = 0; i < 6; i++) {
+          let row = document.createElement("tr");
+
+          for (let j = 0; j < 7; j++) {
+            if (i == 0 && j < startDay) {
+              let cell = document.createElement("td");
+              if (j == 0 || j % 7 == 0) {
+                cell.style.backgroundColor = "rgb(255, 131, 109)";
+              }
+              let cellTxt = document.createTextNode("");
+              cell.appendChild(cellTxt);
+              row.appendChild(cell);
+            } else if (date > numDaysinMonth) {
+              break;
+            } else {
+              let cell = document.createElement("td");
+              if (j == 0 || j % 7 == 0) {
+                cell.style.backgroundColor = "rgb(255, 131, 109)";
+              }
+              let cellTxt = document.createTextNode(date);
+              cell.appendChild(cellTxt);
+              row.appendChild(cell);
+
+              date++;
+            }
+          }
+          tbody.appendChild(row);
+        }
+      }
+    </script>
   </body>
 </html>
