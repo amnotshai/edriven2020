@@ -114,6 +114,8 @@
           if (change < 0) {
             pay.setAttribute("disabled", true);
             pay.style.backgroundColor = "darkred";
+          } else if (isNaN(change)) {
+            changeIn.value = "";
           } else {
             pay.style.backgroundColor = "green";
             pay.removeAttribute("disabled");
