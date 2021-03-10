@@ -4,84 +4,124 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Calendar</title>
+    <title>PA-03</title>
     <link rel="stylesheet" href="css/styles.css" />
-    <style>
-      td,
-      th {
-        border: black 1px solid;
-      }
-    </style>
   </head>
   <body>
-    <h1 id="hid1" style="font-size: larger; margin-bottom: 5%">Calendar</h1>
-    <table id="tbldata" style="border: black 1px solid">
-      <caption id="monthTxt" style="border: black 1px solid"></caption>
-      <thead style="border: black 1px solid">
-        <tr>
-          <th
-            style="
-              border: black;
-              background-color: rgb(255, 131, 109);
-              color: white;
-            "
-          >
-            Sunday
-          </th>
-          <th>Monday</th>
-          <th>Tuesday</th>
-          <th>Wednesday</th>
-          <th>Thursday</th>
-          <th>Friday</th>
-          <th>Saturday</th>
-        </tr>
-      </thead>
-      <tbody id="t-body"></tbody>
-    </table>
-    <script src="/js/my.js"></script>
+    <div class="center">
+      <form
+        action=""
+        style="background-color: whitesmoke; width: 100%"
+        class="center"
+        id="the-form"
+      >
+        <input
+          type="text"
+          class="input-style"
+          id="subtotal"
+          name="subtotal"
+          placeholder="Subtotal"
+          style="text-align: right"
+          oninput="EnableTxT()"
+        />
+        <label for="subtotal"> User input from 100 to 10,000</label><br />
+        <br />
+        <input
+          type="text"
+          class="input-style"
+          id="tax"
+          name="tax"
+          placeholder="Tax"
+          style="text-align: right"
+          disabled
+        />
+        <label for="tax"> +12% Tax</label><br /><br />
+        <input
+          type="text"
+          class="input-style"
+          id="total"
+          name="total"
+          placeholder="Total"
+          style="text-align: right"
+          disabled
+        />
+        <label for="total"> Subtotal + Tax</label><br /><br />
+        <input
+          type="text"
+          class="input-style"
+          id="amt-paid"
+          name="amt-paid"
+          placeholder="Amount Paid"
+          style="text-align: right"
+          oninput="AmountPaid()"
+          disabled
+        />
+        <label for="amt-paid"> Minimum is base on Subtotal+Tax</label
+        ><br /><br />
+        <input
+          type="text"
+          class="input-style"
+          id="change"
+          name="change"
+          placeholder="Change"
+          style="text-align: right"
+          disabled="true"
+        />
+        <label for="change"> Amount Paid - Total</label><br /><br />
+        <button id="btnpay" disabled>Pay</button>
+      </form>
+    </div>
+
     <script>
-      let month = prompt("Month(1-12)", "1");
-      let numMonth = parseInt(month);
-      let day = prompt("Day(1-7)", "1");
-      numDay = parseInt(day);
+      function EnableTxT() {
+        let userIn = document.getElementById("subtotal").value;
+        let paidAmt = document.getElementById("amt-paid");
+        let btnpay = document.getElementById("btnpay");
 
-      if (!(numMonth > 0 && numMonth <= 12) || !(numDay > 0 && numDay <= 7)) {
-        document.getElementById("hid1").innerHTML = "Invalid Entries";
-      } else {
-        document.getElementById("monthTxt").innerHTML =
-          data[numMonth - 1].month;
-        startDay = numDay - 1;
-        numDaysinMonth = data[numMonth - 1].numdays;
-        let tbody = document.getElementById("t-body");
-        tbody.innerHTML = "";
-        let date = 1;
-        for (let i = 0; i < 6; i++) {
-          let row = document.createElement("tr");
+        let taxIn = document.getElementById("tax");
+        let totalIn = document.getElementById("total");
 
-          for (let j = 0; j < 7; j++) {
-            if (i == 0 && j < startDay) {
-              let cell = document.createElement("td");
-              if (j == 0 || j % 7 == 0) {
-                cell.style.backgroundColor = "rgb(255, 131, 109)";
-              }
-              let cellTxt = document.createTextNode("");
-              cell.appendChild(cellTxt);
-              row.appendChild(cell);
-            } else if (date > numDaysinMonth) {
-              break;
-            } else {
-              let cell = document.createElement("td");
-              if (j == 0 || j % 7 == 0) {
-                cell.style.backgroundColor = "rgb(255, 131, 109)";
-              }
-              let cellTxt = document.createTextNode(date);
-              cell.appendChild(cellTxt);
-              row.appendChild(cell);
+        if (userIn >= 100 && userIn <= 1000) {
+          paidAmt.removeAttribute("disabled");
+          btnpay.style.backgroundColor = "green";
+          btnpay.removeAttribute("disabled");
 
-              date++;
-            }
+          let tax = parseInt(userIn) * 0.12;
+          let total = parseInt(userIn) + tax;
+          taxIn.value = tax;
+          totalIn.value = total.toFixed(2);
+          paidAmt.value = total.toFixed(2);
+          AmountPaid();
+        } else if (isNaN(userIn) || userIn < 100 || userIn > 10000) {
+          paidAmt.setAttribute("disabled", true);
+          paidAmt.value = "";
+          taxIn.value = "";
+          totalIn.value = "";
+          btnpay.setAttribute("disabled", true);
+          btnpay.style.backgroundColor = "darkred";
+        }
+      }
+
+      function AmountPaid() {
+        let changeIn = document.getElementById("change");
+        let amt = document.getElementById("amt-paid").value;
+        ttl = document.getElementById("total").value;
+        let pay = document.getElementById("btnpay");
+
+        if (amt != "" || amt != null) {
+          let change = parseInt(amt) - parseInt(ttl);
+          changeIn.value = change.toFixed(2);
+          if (change < 0) {
+            pay.setAttribute("disabled", true);
+            pay.style.backgroundColor = "darkred";
+          } else {
+            pay.style.backgroundColor = "green";
+            pay.removeAttribute("disabled");
           }
-          tbody.appendChild(row);
+        } else {
+          paidAmt.setAttribute("disabled", true);
+          paidAmt.value = "";
+          changeIn.value = "";
         }
       }
     </script>
