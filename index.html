@@ -4,128 +4,78 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>PA-03</title>
+    <title>SA</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-3.4.1.js"
+    ></script>
   </head>
   <body>
-    <div class="center">
-      <form
-        action=""
-        style="background-color: whitesmoke; width: 100%"
-        class="center"
-        id="the-form"
+    <div style="text-align: center">
+      <h1 class="text-white display-2">SHAI</h1>
+      <div
+        class="btn-group btn-group-lg"
+        role="group"
+        aria-label="Basic example"
+        class="media"
       >
-        <input
-          type="text"
-          class="input-style"
-          id="subtotal"
-          name="subtotal"
-          placeholder="Subtotal"
-          style="text-align: right"
-          oninput="EnableTxT()"
-        />
-        <label for="subtotal"> User input from 100 to 10,000</label><br />
-        <br />
-        <input
-          type="text"
-          class="input-style"
-          id="tax"
-          name="tax"
-          placeholder="Tax"
-          style="text-align: right"
-          disabled
-        />
-        <label for="tax"> +12% Tax</label><br /><br />
-        <input
-          type="text"
-          class="input-style"
-          id="total"
-          name="total"
-          placeholder="Total"
-          style="text-align: right"
-          disabled
-        />
-        <label for="total"> Subtotal + Tax</label><br /><br />
-        <input
-          type="text"
-          class="input-style"
-          id="amt-paid"
-          name="amt-paid"
-          placeholder="Amount Paid"
-          style="text-align: right"
-          oninput="AmountPaid()"
-          disabled
-        />
-        <label for="amt-paid"> Minimum is base on Subtotal+Tax</label
-        ><br /><br />
-        <input
-          type="text"
-          class="input-style"
-          id="change"
-          name="change"
-          placeholder="Change"
-          style="text-align: right"
-          disabled="true"
-        />
-        <label for="change"> Amount Paid - Total</label><br /><br />
-        <button id="btnpay" disabled>Pay</button>
-      </form>
+        <a
+          class="fa fa-facebook-square"
+          aria-hidden="true"
+          href="https://www.facebook.com/amnotshaiC"
+        ></a>
+        <a
+          class="fa fa-twitter-square"
+          aria-hidden="true"
+          href="https://twitter.com/amnotshai"
+        ></a>
+        <a
+          class="fa fa-github-square"
+          aria-hidden="true"
+          href="https://github.com/amnotshai"
+        ></a>
+        <a
+          class="fa fa-linkedin-square"
+          aria-hidden="true"
+          href="https://www.linkedin.com/in/shaira-mae-cantil-276788179/"
+        ></a>
+      </div>
+      <br />
+      <a
+        style="text-align: center; border-radius: 10%"
+        href="/records.html"
+        class="btn btn-secondary"
+        >Join</a
+      >
+
+      <footer class="page-footer fixed-bottom font-small">
+        <div class="footer-copyright text-center py-3 text-white-50">
+          <small class="text-muted">© 2021 Copyright: Shaira Cantil</small>
+          <br />
+          <small class="text-muted">Email:smdcantil@addu.edu.ph </small>
+        </div>
+      </footer>
     </div>
 
-    <script>
-      function EnableTxT() {
-        let userIn = document.getElementById("subtotal").value;
-        let paidAmt = document.getElementById("amt-paid");
-        let btnpay = document.getElementById("btnpay");
-
-        let taxIn = document.getElementById("tax");
-        let totalIn = document.getElementById("total");
-
-        if (userIn >= 100 && userIn <= 10000) {
-          paidAmt.removeAttribute("disabled");
-          btnpay.style.backgroundColor = "green";
-          btnpay.removeAttribute("disabled");
-
-          let tax = parseInt(userIn) * 0.12;
-          let total = parseInt(userIn) + tax;
-          taxIn.value = tax;
-          totalIn.value = total.toFixed(2);
-          paidAmt.value = total.toFixed(2);
-          AmountPaid();
-        } else if (isNaN(userIn) || userIn < 100 || userIn > 10000) {
-          paidAmt.setAttribute("disabled", true);
-          paidAmt.value = "";
-          taxIn.value = "";
-          totalIn.value = "";
-          btnpay.setAttribute("disabled", true);
-          btnpay.style.backgroundColor = "darkred";
-        }
-      }
-
-      function AmountPaid() {
-        let changeIn = document.getElementById("change");
-        let amt = document.getElementById("amt-paid").value;
-        ttl = document.getElementById("total").value;
-        let pay = document.getElementById("btnpay");
-
-        if (amt != "" || amt != null) {
-          let change = parseInt(amt) - parseInt(ttl);
-          changeIn.value = change.toFixed(2);
-          if (change < 0) {
-            pay.setAttribute("disabled", true);
-            pay.style.backgroundColor = "darkred";
-          } else if (isNaN(change)) {
-            changeIn.value = "";
-          } else {
-            pay.style.backgroundColor = "green";
-            pay.removeAttribute("disabled");
-          }
-        } else {
-          paidAmt.setAttribute("disabled", true);
-          paidAmt.value = "";
-          changeIn.value = "";
-        }
-      }
-    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

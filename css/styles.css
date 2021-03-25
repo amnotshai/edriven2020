@@ -1,31 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
-  background-color: whitesmoke;
-}
-.input-style {
-  border-radius: 5px;
-  border: 1px solid black;
-  padding: 5px;
-  width: 200px;
-}
-button {
-  border-radius: 3px;
-  color: white;
-  background-color: darkred;
-  width: 70px;
-}
-.center {
-  margin: auto;
-  width: 50%;
-  padding: 5%;
-}
-.background {
-  background-color: lightgray;
-  width: 90%;
-  margin: auto;
-}
-h1 {
-  color: black;
-  font-size: 1em;
-  margin-bottom: 0.3em;
+  background-image: url("https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
   text-align: center;
+}
+
+h1 {
+  font-weight: lighter;
+  color: #fff;
+  text-align: center;
+  padding-top: 60px;
+  margin-bottom: 0;
+}
+.table-record {
+  width: 50%;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 0;
+}
+
+.btn-group {
+  text-align: center;
+  font-size: 30px;
+  margin-top: 0;
+}
+
+.fa {
+  color: #fff;
+  margin: 10px 30px;
+  padding: 20px 20px;
+  font-size: 100px;
+  width: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+.navbar {
+  position: fixed;
+  top: 0;
+}
+.navbar .logo {
+  font-size: 1.5em;
+  text-transform: uppercase;
+  font-weight: 750;
+  letter-spacing: 2px;
+}
+input {
+  border-color: black;
+}
+.container-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
